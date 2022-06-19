@@ -10,6 +10,13 @@ default launch: localhost:8080
 # Requests
 
 ```
+description: frontend
+endpoint: /
+method: GET
+return: react app
+```
+
+```
 description: get public books
 endpoint: /api/v1/book/public
 method: GET
