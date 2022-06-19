@@ -1,0 +1,32 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'war'
+}
+
+String spring = '2.7.0'
+String flyway = '8.5.12'
+String postgres = '42.4.0'
+
+group = 'com.it'
+version = '0.1.0'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-data-jdbc:$spring"
+    implementation "org.springframework.boot:spring-boot-starter-web:$spring"
+    implementation "org.springframework.boot:spring-boot-starter-validation:$spring"
+    implementation "org.flywaydb:flyway-core:$flyway"
+    implementation "org.postgresql:postgresql:$postgres"
+    providedRuntime "org.springframework.boot:spring-boot-starter-tomcat:$spring"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:$spring"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
