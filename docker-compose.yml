@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:10.21
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    ports:
+      - "5432"
+    volumes:
+      - .:/var/lib/postgresql/data
+
+  book_library_java:
+    build: .
+    environment:
+      PG_URL: "jdbc:postgresql://postgres:5432/postgres"
+      PG_USER: "postgres"
+      PG_PASSWORD: "postgres"
+      FLYWAY_PG_URL: "jdbc:postgresql://postgres:5432/postgres"
+      FLYWAY_PG_USER: "postgres"
+      FLYWAY_PG_PASSWORD: "postgres"
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    links:
+      - postgres
+    depends_on:
+      - postgres
